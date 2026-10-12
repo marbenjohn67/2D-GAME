@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101b46">
+  <title>THE ENDLESS JUMP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="The Endless Jump home">
+        <span class="brand-icon">🚀</span>
+        <span>THE ENDLESS <b>JUMP</b></span>
+      </a>
+      <button id="soundBtn" class="icon-btn" aria-label="Toggle sound">🔊</button>
+    </header>
+
+    <section class="game-layout">
+      <div class="game-column">
+        <div class="game-frame">
+          <canvas id="gameCanvas" aria-label="Endless jumping game"></canvas>
+
+          <div class="hud" id="hud" hidden>
+            <div class="hud-card">
+              <span>🏆 SCORE</span>
+              <strong id="score">0</strong>
+            </div>
+            <div class="hud-card">
+              <span>☁️ HEIGHT</span>
+              <strong id="height">0 m</strong>
+            </div>
+            <div class="hud-card">
+              <span>🪙 COINS</span>
+              <strong id="runCoins">0</strong>
+            </div>
+            <button id="pauseBtn" class="pause-btn" aria-label="Pause game">Ⅱ</button>
+          </div>
+
+          <div class="overlay" id="introScreen">
+            <div class="intro-scene">
+              <div class="moon">🌙</div>
+              <div class="floating-star star-a">✦</div>
+              <div class="floating-star star-b">✧</div>
+              <div class="intro-hero">🧑‍🚀</div>
+              <div class="intro-platform">☁️ ━━━━━━━━━</div>
+            </div>
+            <p class="eyebrow">A SKY-HIGH ADVENTURE</p>
+            <h1>THE ENDLESS <span>JUMP</span></h1>
+            <p class="intro-copy">
+              A mysterious tower reaches beyond the clouds.
+              Jump higher, collect treasures, and discover how far you can go!
+            </p>
+            <div class="intro-actions">
+              <button id="storyBtn" class="secondary-btn">▶ STORY</button>
+              <button id="skipBtn" class="primary-btn">SKIP INTRO ↗</button>
+            </div>
+          </div>
+
+          <div class="overlay" id="storyScreen" hidden>
+            <div class="story-emoji" id="storyEmoji">🌤️</div>
+            <p class="eyebrow" id="storyChapter">CHAPTER 1</p>
+            <h2 id="storyTitle">A Tower Above the Clouds</h2>
+            <p id="storyText">A brave little jumper discovers a mysterious trail of floating platforms reaching into the sky.</p>
+            <div class="story-actions">
+              <button id="storySkip" class="secondary-btn">SKIP STORY</button>
+              <button id="storyNext" class="primary-btn">NEXT →</button>
+            </div>
+          </div>
+
+          <div class="overlay" id="menuScreen" hidden>
+            <div class="menu-hero">🦸</div>
+            <p class="eyebrow">YOUR ADVENTURE STARTS HERE</p>
+            <h2>Ready to Jump?</h2>
+            <label class="field-label" for="playerName">YOUR JUMPER NAME</label>
+            <input id="playerName" maxlength="16" placeholder="Sky Jumper" autocomplete="nickname">
+            <label class="field-label" for="headUpload">CUSTOM HEAD PHOTO (OPTIONAL)</label>
+            <input id="headUpload" type="file" accept="image/*">
+            <div class="profile-strip">
+              <div><span>BEST SCORE</span><strong id="bestScore">0</strong></div>
+              <div><span>BEST HEIGHT</span><strong id="bestHeight">0 m</strong></div>
+              <div><span>TOTAL COINS</span><strong id="totalCoins">0</strong></div>
+            </div>
+            <button id="startBtn" class="primary-btn full-btn">🚀 START GAME</button>
+            <div class="menu-actions">
+              <button id="shopBtn" class="secondary-btn">🛍️ SHOP</button>
+              <button id="settingsBtn" class="secondary-btn">⚙️ SETTINGS</button>
+              <button id="leaderboardBtn" class="secondary-btn">🏆 RECORDS</button>
+            </div>
+          </div>
+
+          <div class="overlay" id="pauseScreen" hidden>
+            <div class="big-emoji">⏸️</div>
+            <h2>Game Paused</h2>
+            <p>Catch your breath, jumper!</p>
+            <button id="resumeBtn" class="primary-btn full-btn">▶ RESUME</button>
+            <button id="pauseMenuBtn" class="secondary-btn full-btn">MAIN MENU</button>
+          </div>
+
+          <div class="overlay" id="gameOverScreen" hidden>
+            <div class="big-emoji">💫</div>
+            <p class="eyebrow">ADVENTURE COMPLETE</p>
+            <h2 id="gameOverTitle">Nice Jump!</h2>
+            <div class="results-grid">
+              <div><span>FINAL SCORE</span><strong id="finalScore">0</strong></div>
+              <div><span>MAX HEIGHT</span><strong id="finalHeight">0 m</strong></div>
+              <div><span>COINS FOUND</span><strong id="finalCoins">0</strong></div>
+              <div><span>PERSONAL BEST</span><strong id="finalBest">0</strong></div>
+            </div>
+            <button id="retryBtn" class="primary-btn full-btn">🔄 PLAY AGAIN</button>
+            <button id="overShopBtn" class="secondary-btn full-btn">🛍️ VISIT SHOP</button>
+            <button id="overMenuBtn" class="secondary-btn full-btn">⌂ MAIN MENU</button>
+          </div>
+
+          <div class="overlay" id="shopScreen" hidden>
+            <p class="eyebrow">POWER UP YOUR ADVENTURE</p>
+            <h2>🛍️ Jumper Shop</h2>
+            <div class="shop-balance">🪙 Your coins: <strong id="shopCoins">0</strong></div>
+            <div class="shop-list">
+              <article class="shop-item">
+                <span class="shop-icon">🪶</span>
+                <div><strong>Feather Fall</strong><p>Slow falling once.</p><small>Price: 30 coins</small></div>
+                <button data-buy="feather" class="buy-btn">BUY</button>
+              </article>
+              <article class="shop-item">
+                <span class="shop-icon">🧲</span>
+                <div><strong>Coin Magnet</strong><p>Attract nearby coins.</p><small>Price: 40 coins</small></div>
+                <button data-buy="magnet" class="buy-btn">BUY</button>
+              </article>
+              <article class="shop-item">
+                <span class="shop-icon">🌀</span>
+                <div><strong>Super Spring</strong><p>One extra-high jump.</p><small>Price: 50 coins</small></div>
+                <button data-buy="super" class="buy-btn">BUY</button>
+              </article>
+            </div>
+            <div id="inventory" class="inventory"></div>
+            <button id="shopBackBtn" class="secondary-btn full-btn">← BACK</button>
+          </div>
+
+          <div class="overlay" id="settingsScreen" hidden>
+            <p class="eyebrow">MAKE IT YOURS</p>
+            <h2>⚙️ Settings</h2>
+            <label class="setting-row">Sound effects <input id="sfxSetting" type="checkbox" checked></label>
+            <label class="setting-row">Background music <input id="musicSetting" type="checkbox"></label>
+            <label class="setting-row">Difficulty
+              <select id="difficultySetting">
+                <option value="easy">Easy</option>
+                <option value="normal" selected>Normal</option>
+                <option value="hard">Hard</option>
+              </select>
+            </label>
+            <button id="settingsBackBtn" class="secondary-btn full-btn">← BACK</button>
+          </div>
+
+          <div class="overlay" id="recordsScreen" hidden>
+            <p class="eyebrow">REACH FOR THE STARS</p>
+            <h2>🏆 Best Runs</h2>
+            <ol id="leaderboardList" class="leaderboard-list"></ol>
+            <button id="recordsBackBtn" class="secondary-btn full-btn">← BACK</button>
+          </div>
+
+          <div class="touch-controls" id="touchControls" hidden>
+            <button id="leftBtn" aria-label="Move left">◀</button>
+            <button id="rightBtn" aria-label="Move right">▶</button>
+          </div>
+        </div>
+
+        <div class="help-bar">
+          <span>⌨️ <b>← →</b> or <b>A / D</b> to move</span>
+          <span>📱 Touch the arrows on mobile</span>
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="side-card player-card">
+          <div class="side-heading">PLAYER PROFILE <span>✦</span></div>
+          <div class="avatar" id="profileAvatar">🦸</div>
+          <h3 id="profileName">Sky Jumper</h3>
+          <p>Rookie Sky Explorer</p>
+          <div class="stat-row"><span>🏆 Best score</span><strong id="sideBestScore">0</strong></div>
+          <div class="stat-row"><span>☁️ Highest height</span><strong id="sideBestHeight">0 m</strong></div>
+          <div class="stat-row"><span>🪙 Total coins</span><strong id="sideCoins">0</strong></div>
+        </div>
+        <div class="side-card">
+          <div class="side-heading">YOUR INVENTORY <span>🎒</span></div>
+          <div id="sideInventory" class="side-inventory">No power-ups yet</div>
+        </div>
+        <div class="side-card tips-card">
+          <div class="side-heading">JUMPER TIPS <span>💡</span></div>
+          <p>🟢 Land on platforms to bounce automatically.</p>
+          <p>🌀 Springs launch you much higher!</p>
+          <p>🪙 Grab coins to unlock power-ups.</p>
+          <p>↔️ The edges wrap around. Use them!</p>
+        </div>
+      </aside>
+    </section>
+    <footer>Made for sky explorers ✦ THE ENDLESS JUMP</footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
