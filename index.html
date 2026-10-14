@@ -12,7 +12,7 @@
   <main class="app">
     <header class="topbar">
       <a class="brand" href="#" aria-label="The Endless Jump home">
-        <span class="brand-icon">🚀</span>
+        <span class="brand-icon"></span>
         <span>THE ENDLESS <b>JUMP</b></span>
       </a>
       <button id="soundBtn" class="icon-btn" aria-label="Toggle sound">🔊</button>
@@ -44,18 +44,19 @@
               <div class="moon">🌙</div>
               <div class="floating-star star-a">✦</div>
               <div class="floating-star star-b">✧</div>
-              <div class="intro-hero">🧑‍🚀</div>
-              <div class="intro-platform">☁️ ━━━━━━━━━</div>
+              <div class="intro-hero">
+                <img src="ben.png" alt="Jumping picture" class="jumping-picture" width="125" border-radius="20px">
+              </div>
+              <div class="intro-platform">☁️━━━━━━━━━☁️</div>
             </div>
-            <p class="eyebrow">A SKY-HIGH ADVENTURE</p>
+            <p class="eyebrow">JUMP HIGH</p>
             <h1>THE ENDLESS <span>JUMP</span></h1>
-            <p class="intro-copy">
-              A mysterious tower reaches beyond the clouds.
-              Jump higher, collect treasures, and discover how far you can go!
+            <p class="intro-copy" aria-flowto="20px">
+             Watch the story
             </p>
             <div class="intro-actions">
               <button id="storyBtn" class="secondary-btn">▶ STORY</button>
-              <button id="skipBtn" class="primary-btn">SKIP INTRO ↗</button>
+              <button id="skipBtn" class="primary-btn">SKIP INTRO</button>
             </div>
           </div>
 
@@ -66,12 +67,12 @@
             <p id="storyText">A brave little jumper discovers a mysterious trail of floating platforms reaching into the sky.</p>
             <div class="story-actions">
               <button id="storySkip" class="secondary-btn">SKIP STORY</button>
-              <button id="storyNext" class="primary-btn">NEXT →</button>
+              <button id="storyNext" class="primary-btn">NEXT</button>
             </div>
           </div>
 
           <div class="overlay" id="menuScreen" hidden>
-            <div class="menu-hero">🦸</div>
+            <div class="menu-hero"><img src="betia.png" alt="Jumping picture" class="jumping-picture" width="125" border-radius="20px"> </div>
             <p class="eyebrow">YOUR ADVENTURE STARTS HERE</p>
             <h2>Ready to Jump?</h2>
             <label class="field-label" for="playerName">YOUR JUMPER NAME</label>
@@ -136,7 +137,7 @@
               </article>
             </div>
             <div id="inventory" class="inventory"></div>
-            <button id="shopBackBtn" class="secondary-btn full-btn">← BACK</button>
+            <button id="shopBackBtn" class="secondary-btn full-btn">BACK</button>
           </div>
 
           <div class="overlay" id="settingsScreen" hidden>
@@ -151,14 +152,14 @@
                 <option value="hard">Hard</option>
               </select>
             </label>
-            <button id="settingsBackBtn" class="secondary-btn full-btn">← BACK</button>
+            <button id="settingsBackBtn" class="secondary-btn full-btn">BACK</button>
           </div>
 
           <div class="overlay" id="recordsScreen" hidden>
             <p class="eyebrow">REACH FOR THE STARS</p>
             <h2>🏆 Best Runs</h2>
             <ol id="leaderboardList" class="leaderboard-list"></ol>
-            <button id="recordsBackBtn" class="secondary-btn full-btn">← BACK</button>
+            <button id="recordsBackBtn" class="secondary-btn full-btn">BACK</button>
           </div>
 
           <div class="touch-controls" id="touchControls" hidden>
@@ -168,17 +169,17 @@
         </div>
 
         <div class="help-bar">
-          <span>⌨️ <b>← →</b> or <b>A / D</b> to move</span>
-          <span>📱 Touch the arrows on mobile</span>
+          <span><b></b> <b></b></span>
+          <span> Touch the arrows on mobile</span>
         </div>
       </div>
 
       <aside class="sidebar">
         <div class="side-card player-card">
           <div class="side-heading">PLAYER PROFILE <span>✦</span></div>
-          <div class="avatar" id="profileAvatar">🦸</div>
-          <h3 id="profileName">Sky Jumper</h3>
-          <p>Rookie Sky Explorer</p>
+          <div class="avatar" id="profileAvatar"> <img src="betia.png" width="125" border-radius="20px"></div>
+          <h3 id="profileName">DINO_GWAPO</h3>
+          <p>MARBEN_POGI</p>
           <div class="stat-row"><span>🏆 Best score</span><strong id="sideBestScore">0</strong></div>
           <div class="stat-row"><span>☁️ Highest height</span><strong id="sideBestHeight">0 m</strong></div>
           <div class="stat-row"><span>🪙 Total coins</span><strong id="sideCoins">0</strong></div>
@@ -196,7 +197,7 @@
         </div>
       </aside>
     </section>
-    <footer>Made for sky explorers ✦ THE ENDLESS JUMP</footer>
+    <footer>Central Phllipine State University</footer>
   </main>
   <script src="game.js"></script>
 </body>
