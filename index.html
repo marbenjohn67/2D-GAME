@@ -40,19 +40,24 @@
           </div>
 
           <div class="overlay" id="introScreen">
-            <div class="intro-scene">
-              <div class="moon">🌙</div>
+            <div class="intro-scene" aria-hidden="true">
+              <div class="scene-sun"></div>
+              <div class="scene-cloud cloud-left"></div>
+              <div class="scene-cloud cloud-right"></div>
               <div class="floating-star star-a">✦</div>
               <div class="floating-star star-b">✧</div>
+              <div class="scene-platform platform-left"></div>
+              <div class="scene-platform platform-right"></div>
               <div class="intro-hero">
-                <img src="ben.png" alt="Jumping picture" class="jumping-picture" width="125" border-radius="20px">
+                <span class="hero-shadow"></span>
+                <img src="betia.png" alt="" class="jumping-picture" width="125">
               </div>
-              <div class="intro-platform">☁️━━━━━━━━━☁️</div>
+              <div class="intro-platform"></div>
             </div>
             <p class="eyebrow">JUMP HIGH</p>
             <h1>THE ENDLESS <span>JUMP</span></h1>
-            <p class="intro-copy" aria-flowto="20px">
-             Watch the story
+            <p class="intro-copy">
+
             </p>
             <div class="intro-actions">
               <button id="storyBtn" class="secondary-btn">▶ STORY</button>
@@ -134,6 +139,11 @@
                 <span class="shop-icon">🌀</span>
                 <div><strong>Super Spring</strong><p>One extra-high jump.</p><small>Price: 50 coins</small></div>
                 <button data-buy="super" class="buy-btn">BUY</button>
+              </article>
+              <article class="shop-item rocket-item">
+                <span class="shop-icon">🚀</span>
+                <div><strong>Rocket Jump</strong><p>Blast off with one mega jump.</p><small>Price: 70 coins</small></div>
+                <button data-buy="rocket" class="buy-btn">BUY</button>
               </article>
             </div>
             <div id="inventory" class="inventory"></div>

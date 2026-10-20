@@ -42,7 +42,7 @@ const DEFAULT_SAVE = {
   sfx: true,
   music: false,
   difficulty: "normal",
-  inventory: { feather: 0, magnet: 0, super: 0 },
+  inventory: { feather: 0, magnet: 0, super: 0, rocket: 0 },
   leaderboard: [],
   headData: null
 };
@@ -118,7 +118,8 @@ function updateInventoryUI() {
   const names = {
     feather: "🪶 Feather Fall",
     magnet: "🧲 Coin Magnet",
-    super: "🌀 Super Spring"
+    super: "🌀 Super Spring",
+    rocket: "🚀 Rocket Jump"
   };
 
   const owned = Object.entries(save.inventory)
@@ -379,7 +380,8 @@ const PLAYER_SPEED = 300;
 const SHOP_ITEMS = {
   feather: { price: 30 },
   magnet: { price: 40 },
-  super: { price: 50 }
+  super: { price: 50 },
+  rocket: { price: 70 }
 };
 
 let running = false;
@@ -402,7 +404,7 @@ let maxHeight = 0;
 let jumpCount = 0;
 
 let keys = { left: false, right: false };
-let activeItems = { feather: 0, magnet: 0, super: 0 };
+let activeItems = { feather: 0, magnet: 0, super: 0, rocket: 0 };
 let backgroundOffset = 0;
 
 function rand(min, max) {
@@ -441,7 +443,7 @@ function startGame() {
   gameEnded = false;
   paused = false;
 
-  activeItems = { feather: 0, magnet: 0, super: 0 };
+  activeItems = { feather: 0, magnet: 0, super: 0, rocket: 0 };
 
   // Items bought from the shop are consumed one at a time per run.
   for (const key of Object.keys(activeItems)) {
@@ -479,6 +481,7 @@ function startGame() {
     facing: 1,
     squash: 1,
     blink: 0,
+    rocketBoostTimer: 0,
     alive: true
   };
 
@@ -627,8 +630,14 @@ function landOn(platform) {
     ? SPRING_VELOCITY
     : JUMP_VELOCITY;
 
-  // Consume a super jump only when a landing triggers it.
-  if (activeItems.super > 0) {
+  if (activeItems.rocket > 0) {
+    player.vy = 1500;
+    player.rocketBoostTimer = 1.4;
+    activeItems.rocket--;
+    burst(player.x + player.width / 2, player.y, "#ff9b45", 22);
+    burst(player.x + player.width / 2, player.y, "#fff0a1", 12);
+    playSpring();
+  } else if (activeItems.super > 0) {
     player.vy = SUPER_VELOCITY;
     activeItems.super--;
     burst(player.x + player.width / 2, player.y, "#ffe77a", 20);
@@ -697,6 +706,7 @@ function updatePlayer(dt) {
 
   player.squash += (1 - player.squash) * Math.min(1, dt * 12);
   player.blink = Math.max(0, player.blink - dt);
+  player.rocketBoostTimer = Math.max(0, player.rocketBoostTimer - dt);
 
   // A short feather effect, consumed during this run.
   if (activeItems.feather > 0) {
@@ -1146,6 +1156,21 @@ function drawPlayer() {
     ctx.beginPath();
     ctx.arc(w / 2, 13, 4, 0.2, Math.PI - 0.2);
     ctx.stroke();
+  }
+
+  if (player.rocketBoostTimer > 0) {
+    const flameLength = 12 + Math.sin(performance.now() / 35) * 5;
+    const flame = ctx.createLinearGradient(0, 36, 0, 36 + flameLength);
+    flame.addColorStop(0, "#fff7a1");
+    flame.addColorStop(0.45, "#ffad3d");
+    flame.addColorStop(1, "#ff5b52");
+    ctx.fillStyle = flame;
+    ctx.beginPath();
+    ctx.moveTo(0, 35);
+    ctx.lineTo(6, 35);
+    ctx.lineTo(3, 35 + flameLength);
+    ctx.closePath();
+    ctx.fill();
   }
 
   // Jetpack.
